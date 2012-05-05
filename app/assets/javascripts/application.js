@@ -14,12 +14,6 @@
 //= require jquery_ujs
 //= require jquery.timeago
 //= require twitter/bootstrap
-//= require underscore
-//= require backbone
-//= require backbone_rails_sync
-//= require backbone_datalink
-//= require backbone/kanji_drill
-//= require_tree .
 
 window.bootstrap = {};
 

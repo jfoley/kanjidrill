@@ -1,0 +1,17 @@
+<div id="flash">
+  <% if flash[:message].present? %>
+    <div class='alert alert-success'>
+      <%= flash[:message] %>
+    </div>
+  <% end %>
+  <% if flash[:notice].present? %>
+    <div class='alert alert-info'>
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <% if flash[:warning].present? %>
+    <div class='alert alert-error'>
+      <%= flash[:warning] %>
+    </div>
+  <% end %>
+</div>

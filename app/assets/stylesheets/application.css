@@ -12,10 +12,11 @@
  *= require_tree .
 */
 
-.content .row {
+#quiz {
   text-align: center;
 }
 
 .btn-grp {
   display: inline-block;
 }
+
