@@ -1,14 +1,27 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :trackable,
+         :validatable
+         #:encryptable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
+  attr_accessible :email,
+                  :password,
+                  :password_confirmation,
+                  :remember_me
 
-  def name
-    "John Foley"
+  has_many :checks
+
+  def stats(kanji)
+    check_relation = self.checks.where(:kanji_id => kanji.id)
+
+    {
+      :last_seen => check_relation.order('created_at DESC').first.created_at.getutc.iso8601,
+      :no_count => check_relation.where(result: 'no').count,
+      :maybe_count => check_relation.where(result: 'maybe').count,
+      :yes_count => check_relation.where(result: 'yes').count
+    }
   end
 end
