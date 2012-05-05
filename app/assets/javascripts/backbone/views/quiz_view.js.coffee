@@ -30,7 +30,7 @@ class KanjiDrill.Views.QuizView extends Backbone.View
     @$('.btn-grp').html(@createButton('Show'))
 
   renderAnswerButtons: ->
-    @$('.btn-grp').append($('<p class="remember">Did you Remember?</p>'))
+    @$('.stats').html($('<p class="remember">Did you Remember?</p>'))
     buttons = ['no', 'maybe', 'yes']
     @$('.btn-grp').append(@createButton(text)) for text in buttons
 
@@ -40,7 +40,6 @@ class KanjiDrill.Views.QuizView extends Backbone.View
   showMeaning: =>
     @$('button.show').remove()
     meaning = @kanji.get('meaning')
-    @$('.flashcard .glyph').text('')
     @$('.flashcard .meaning').text(meaning)
     @renderAnswerButtons()
 
