@@ -2,6 +2,7 @@ KanjiDrill::Application.routes.draw do
   devise_for :users
 
   resources :grades, :only => [:index, :show]
+  resources :checks, :only => :create
 
   root :to => 'home#index'
   # The priority is based upon order of creation:

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120504042222) do
+ActiveRecord::Schema.define(:version => 20120504141258) do
+
+  create_table "checks", :force => true do |t|
+    t.string   "result"
+    t.integer  "kanji_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "grades", :force => true do |t|
   end

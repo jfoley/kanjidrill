@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
 */
+
+.content .row {
+  text-align: center;
+}
+
+.btn-grp {
+  display: inline-block;
+}

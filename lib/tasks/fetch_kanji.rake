@@ -1,14 +1,13 @@
 require 'open-uri'
 
 namespace :kanji do
-  desc "go out and fetch the kanji from the wikipedia page"
+  desc "go out and fetch the kanji from the wikipedia page. (This task is idempotent)"
   task :fetch => :environment do
     uri = "http://en.wikipedia.org/wiki/Ky%C5%8Diku_kanji"
     doc = Nokogiri::HTML(open(uri))
 
     grades = []
     doc.css('.wikitable').each do |table_node|
-      puts "reading table"
       grades << read_table(table_node)
     end
 
@@ -16,7 +15,6 @@ namespace :kanji do
       grade = Grade.where(:id => i + 1).first
       grade ||= Grade.create
 
-      puts "grade_array: #{grade_array}"
       grade_array.each do |tuple|
         kanji, meaning = tuple[0], tuple[1]
 
@@ -30,7 +28,6 @@ namespace :kanji do
   def read_table(table_node)
     ret = []
     rows = table_node.css('tr')
-    puts "rows: #{rows.length}"
     rows[1..-1].each do |row| # skip the first row, its a header
       tds = row.css('td')[0..1]
       ret << tds.map(&:text)
