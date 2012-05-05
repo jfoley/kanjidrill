@@ -4,8 +4,9 @@ class User < ActiveRecord::Base
          :recoverable,
          :rememberable,
          :trackable,
-         :validatable
-         #:encryptable
+         :validatable,
+         :encryptable,
+         :encryptor => :authlogic_sha512
 
   attr_accessible :email,
                   :password,
