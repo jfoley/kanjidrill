@@ -2,7 +2,7 @@
   <%= javascript_include_tag 'login' %>
 <% end %>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span6">
     <div class="hero-unit">
       <h1>漢字Drill</h1>
@@ -16,17 +16,17 @@
   <div class="span4">
     <% unless user_signed_in? %>
       <%= form_for(User.new, :url => session_path(User), :html => { :id => 'sign_in', :class => ['well', 'form-inline'] }, :remote => true, :format => :json) do |f| %>
-        <div class="row">
+        <div class="row-fluid">
           <%= f.email_field :email, :class => 'input-small', :placeholder => 'email' %>
           <%= f.password_field :password, :class => 'input-small', :placeholder => 'password'  %>
-          <%= f.submit "Sign in", :class => 'btn' %>
+          <%= f.submit "Sign in", :class => 'btn btn-small' %>
         </div>
-        <div class="row">
+        <div class="row-fluid">
           <%= f.label :remember_me, :class => 'checkbox' do %>
             <%= f.check_box :remember_me %> Remember me
           <% end %>
 
-          <%= link_to "Forgot your password?", new_password_path(User) %>
+          <%= link_to "Forgot your password?", new_password_path(User), :class => 'pull-right' %>
         </div>
       <% end %>
     <% end %>
