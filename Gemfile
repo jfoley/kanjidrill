@@ -10,8 +10,10 @@ gem 'thin'
 gem 'delayed_job_active_record'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'hirefire'
 
 group :development, :test do
+  gem 'debugger'
   gem 'sqlite3'
 end
 
@@ -39,8 +41,6 @@ gem 'twitter-bootstrap-rails'
 gem 'devise'
 
 gem 'nokogiri'
-
-gem 'debugger'
 
 gem 'rails-backbone'
 # To use ActiveModel has_secure_password
