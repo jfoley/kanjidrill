@@ -11,5 +11,9 @@ KanjiDrill::Application.routes.draw do
   resource :home, :controller => :home, :only => :index
   match '/about' => 'home#about', :as => :about
 
+  match '/s3_policy' => 'avatar#s3_policy'
+  match '/fetch_avatar' => 'avatar#fetch_avatar'
+  match '/poll_avatar' => 'avatar#poll'
+
   root :to => 'home#index'
 end

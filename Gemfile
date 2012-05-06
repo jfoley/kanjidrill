@@ -8,6 +8,8 @@ gem 'rails', '3.2.3'
 gem 'thin'
 
 gem 'delayed_job_active_record'
+gem 'paperclip'
+gem 'aws-sdk'
 
 group :development, :test do
   gem 'sqlite3'

@@ -14,10 +14,10 @@
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= yield(:styles) %>
 
-    <link href="/assets/favicon.ico" rel="shortcut icon">
-    <link href="/images/apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="/images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
-    <link href="/images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+    <link href="/favicon.ico" rel="shortcut icon">
+    <link href="/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+    <link href="/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
   </head>
   <body>
 
@@ -36,14 +36,14 @@
             <ul class="nav pull-right">
               <% if user_signed_in? %>
                 <li>
-                  <%= link_to current_user.email, dashboard_path %>
+                  <%= image_tag current_user.avatar.url(:thumb), :alt => 'avatar', :class => 'avatar thumb' %>
+                  <%= link_to current_user.email, dashboard_path, :class => 'email' %>
                 </li>
                 <li>
                   <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
                 </li>
               <% end %>
             </ul>
-
             <ul class="nav">
               <li><%= link_to "About", about_path %></li>
               <% if user_signed_in? %>

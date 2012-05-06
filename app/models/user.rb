@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 
   has_many :checks
 
+  has_attached_file :avatar, :styles => { :profile => "100x100>", :thumb => "30x30>" }
+
   def stats(kanji)
     check_relation = self.checks.where(:kanji_id => kanji.id)
 

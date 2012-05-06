@@ -1,1 +1,24 @@
-dashboard
+<%= content_for :styles do %>
+  <%= stylesheet_link_tag 'dashboard' %>
+<% end %>
+
+<%= content_for :scripts do %>
+  <%= javascript_include_tag 'views/dashboard/show' %>
+<% end %>
+
+<h2>Welcome!</h2>
+<%= image_tag current_user.avatar.url(:profile), :alt => 'avatar', :class => 'avatar profile' %>
+
+<form id="avatar_upload" action="<%= s3_bucket_url %>" method="POST" enctype="multipart/form-data" data-bucket="<%= ENV['AWS_S3_BUCKET'] %>">
+  <span class="btn btn-success fileinput-button">
+    <input type="file" name="file">
+    <span>Choose Avatar</span>
+  </span>
+
+  <input type="hidden" name="AWSAccessKeyId" value="<%= ENV['AWS_ACCESS_KEY'] %>">
+  <input type="hidden" name="acl" value="public-read">
+  <input type="hidden" name="success_action_status" value="200">
+  <input type="hidden" name="policy">
+  <input type="hidden" name="signature">
+  <input type="hidden" name="key">
+</form>

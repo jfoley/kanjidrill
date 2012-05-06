@@ -1,8 +1,14 @@
-#= require_self
-#= require_tree ./templates
-#= require_tree ./models
-#= require_tree ./views
-#= require_tree ./routers
+//= require underscore
+//= require backbone
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require backbone/kanji_drill
+
+//= require_self
+//= require_tree ./templates
+//= require_tree ./models
+//= require_tree ./views
+//= require_tree ./routers
 
 window.KanjiDrill =
   Models: {}
@@ -10,7 +16,3 @@ window.KanjiDrill =
   Routers: {}
   Views: {}
 
-$ ->
-  raw_kanji = JSON.parse($('#bootstrapKanji').text())
-  kanji = new KanjiDrill.Collections.KanjiCollection(raw_kanji)
-  quiz_view = new KanjiDrill.Views.QuizView(el: $('#quiz'), collection: kanji)
