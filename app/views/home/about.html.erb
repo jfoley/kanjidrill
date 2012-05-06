@@ -1,1 +1,40 @@
-About
+<h2>About</h2>
+<p>
+This app helps you to remember the
+<a href="http://en.wikipedia.org/wiki/Ky%C5%8Diku_kanji">
+  Kyoiku Kanji
+</a>
+.
+
+<h3>Instructions</h3>
+<ol>
+  <li>
+    First, you need to make an account so your progress can be tracked. Go to
+    <%= link_to "the homepage", root_path %>
+    and click sign up.
+  </li>
+  <li>
+    Next, you will be taken to your
+    <%= link_to "user dashboard", dashboard_path %>
+    .
+    There isn't much to do here yet, but you can upload an avatar for yourself.
+    Just click on the "choose avatar" button.
+  </li>
+  <li>
+    Finally, the main event, drilling Kanji.
+    Click on any of the grades at the top of the page, and begin drilling!
+    The process works like this:
+      <ul>
+        <li>You are shown a Kanji</li>
+        <li>You try and remember the meaning</li>
+        <li>When you are ready, show the meaning</li>
+        <li>Choose how easy or hard it was to remember</li>
+        <li>The system will remember your answer and show you your progress</li>
+      </ul>
+  </li>
+</ol>
+
+<h4>How it works</h4>
+At the moment, you will be shown Kanji at random from a given grade level.
+however, soon I will be implementing a Spaced Repetition algorithm so you
+will be shown kanji that you have a hard time remembering more frequently.
