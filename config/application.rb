@@ -55,5 +55,15 @@ module KanjiDrill
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :domain               => ENV['MAIL_DOMAIN'],
+      :user_name            => ENV['MAIL_USERNAME'],
+      :password             => ENV['MAIL_PASSWORD'],
+      :authentication       => "plain",
+      :enable_starttls_auto => true
+    }
   end
 end

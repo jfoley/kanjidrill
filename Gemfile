@@ -7,6 +7,8 @@ gem 'rails', '3.2.3'
 
 gem 'thin'
 
+gem 'delayed_job_active_record'
+
 group :development, :test do
   gem 'sqlite3'
 end
