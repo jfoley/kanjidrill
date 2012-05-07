@@ -27,12 +27,12 @@ class KanjiDrill.Views.QuizView extends Backbone.View
     $("<button class='btn #{className}'>#{text}</button>")
 
   renderShowButton: ->
-    @$('.btn-grp').html(@createButton('Show'))
+    @btnGrp.html(@createButton('Show'))
 
   renderAnswerButtons: ->
-    @$('.stats').html($('<p class="remember">Did you Remember?</p>'))
+    @btnGrp.html($('<p class="remember">Did you Remember?</p>'))
     buttons = ['no', 'maybe', 'yes']
-    @$('.btn-grp').append(@createButton(text)) for text in buttons
+    @btnGrp.append(@createButton(text)) for text in buttons
 
   renderNextButton: ->
     @btnGrp.html(@createButton('next'))
@@ -58,7 +58,7 @@ class KanjiDrill.Views.QuizView extends Backbone.View
 
     @$('.stats').html(def_list)
     @$('.timeago').timeago()
-    @$('.btn-grp').empty()
+    @btnGrp.empty()
     @renderNextButton()
 
   clickNo: ->
