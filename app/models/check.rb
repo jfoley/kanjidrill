@@ -3,4 +3,10 @@ class Check < ActiveRecord::Base
 
   belongs_to :kanji
   belongs_to :user
+
+  validates :result,
+    :presence => true,
+    :inclusion => { :in => [:no, :hard, :normal, :easy] }
+  validates :kanji_id, :presence => true
+  validates :user_id, :presence => true
 end

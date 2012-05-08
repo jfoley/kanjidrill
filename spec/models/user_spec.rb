@@ -1,14 +1,10 @@
 require 'spec_helper'
 
 describe User do
-  it "has a whitelist of accessible attributes" do
-    user = Factory.build(:user)
-
-    user.should allow_mass_assignment_of :email
-    user.should allow_mass_assignment_of :password
-    user.should allow_mass_assignment_of :password_confirmation
-    user.should allow_mass_assignment_of :remember_me
-  end
+  it { should allow_mass_assignment_of :email }
+  it { should allow_mass_assignment_of :password }
+  it { should allow_mass_assignment_of :password_confirmation }
+  it { should allow_mass_assignment_of :remember_me }
 
   it "has an attached avatar" do
     user = Factory.build(:user)

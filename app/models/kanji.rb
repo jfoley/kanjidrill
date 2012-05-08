@@ -3,4 +3,8 @@ class Kanji < ActiveRecord::Base
 
   belongs_to :grade
   has_many :checks
+
+  validates :glyph,    :presence => true
+  validates :meaning,  :presence => true
+  validates :grade_id, :presence => true
 end
