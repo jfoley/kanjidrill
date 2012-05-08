@@ -15,6 +15,10 @@ gem 'hirefire'
 group :development, :test do
   gem 'debugger'
   gem 'sqlite3'
+
+  gem 'rspec-rails'
+  gem 'shoulda'
+  gem 'factory_girl_rails', :require => false
 end
 
 group :production do
