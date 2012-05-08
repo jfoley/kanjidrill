@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  attr_accessible :email,
+                  :password,
+                  :password_confirmation,
+                  :remember_me
+
   devise :database_authenticatable,
          :registerable,
          :recoverable,
@@ -8,23 +13,6 @@ class User < ActiveRecord::Base
          :encryptable,
          :encryptor => :authlogic_sha512
 
-  attr_accessible :email,
-                  :password,
-                  :password_confirmation,
-                  :remember_me
-
   has_many :checks
-
   has_attached_file :avatar, :styles => { :profile => "100x100>", :thumb => "30x30>" }
-
-  def stats(kanji)
-    check_relation = self.checks.where(:kanji_id => kanji.id)
-
-    {
-      :last_seen => check_relation.order('created_at DESC').first.created_at.getutc.iso8601,
-      :no_count => check_relation.where(result: 'no').count,
-      :maybe_count => check_relation.where(result: 'maybe').count,
-      :yes_count => check_relation.where(result: 'yes').count
-    }
-  end
 end

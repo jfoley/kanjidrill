@@ -3,5 +3,4 @@ class Kanji < ActiveRecord::Base
 
   belongs_to :grade
   has_many :checks
-
 end

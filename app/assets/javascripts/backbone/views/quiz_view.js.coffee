@@ -46,9 +46,9 @@ class KanjiDrill.Views.QuizView extends Backbone.View
   showStats: (model, response) =>
     time = "<time class='timeago' datetime='#{response.last_seen}'>#{response.last_seen}</time>"
     last_seen = $("<dt>Last Seen</dt><dd>#{time}</dd>")
-    no_count = $("<dt>No</dt><dd>#{response.no_count}</dd>")
-    maybe_count = $("<dt>Maybe</dt><dd>#{response.maybe_count}</dd>")
-    yes_count = $("<dt>Yes</dt><dd>#{response.yes_count}</dd>")
+    no_count = $("<dt>Hard</dt><dd>#{response.hard_count}</dd>")
+    maybe_count = $("<dt>Normal</dt><dd>#{response.normal_count}</dd>")
+    yes_count = $("<dt>Easy</dt><dd>#{response.easy_count}</dd>")
 
     def_list = $('<dl class="dl-horizontal"></dl>')
     def_list.append(last_seen)
@@ -63,7 +63,6 @@ class KanjiDrill.Views.QuizView extends Backbone.View
 
   clickNo: ->
     @createCheck('no')
-
 
   clickMaybe: ->
     @createCheck('maybe')
