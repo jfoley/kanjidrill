@@ -1,0 +1,12 @@
+<dl class='dl-horizontal'>
+  <dt>Last Seen:</dt>
+  <dd>
+    <time class='timeago' datetime='<%= @last_seen %>'>
+      <%= @last_seen %>
+    </time>
+  </dd>
+  <dd>Again:</dd><dt><%= @again_count %></dt>
+  <dd>Hard:</dd><dt><%= @hard_count %></dt>
+  <dd>Normal:</dd><dt><%= @normal_count %></dt>
+  <dd>Easy:</dd><dt><%= @easy_count %></dt>
+</dl>
