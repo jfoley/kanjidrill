@@ -1,7 +1,8 @@
-#= require backbone/kanji_drill
+//= require backbone/kanji_drill
 
 QuizView = KanjiDrill.Views.QuizView
 KanjiCollection = KanjiDrill.Collections.KanjiCollection
+ChecksCollection = KanjiDrill.Collections.ChecksCollection
 
 rawKanji = [
   { glyph: "一", grade_id: 1, id: 1, meaning: "one" },
@@ -25,7 +26,7 @@ describe 'QuizView', ->
     expect(@view).toBeDefined()
 
   it 'manages a collection of checks', ->
-    expect(@view.checks).toBeDefined()
+    expect(@view.checks.constructor).toBe(ChecksCollection)
 
   it 'sets a shortcut to the .btn-grp element', ->
     expect(@view.btnGrp).toExist()
@@ -34,6 +35,7 @@ describe 'QuizView', ->
     it 'calls click on Show when spacebar is pressed', ->
       sinon.spy(@view, 'clickShow')
       @view.startQuiz()
+      @view.delegateEvents()
 
       event = $.Event('keyup')
       event.which = 32 # spacebar
@@ -44,6 +46,8 @@ describe 'QuizView', ->
     it 'calls click on Next when spacebar is pressed', ->
       sinon.spy(@view, 'clickNext')
       @view.startQuiz()
+      @view.showStats(null, @response)
+      @view.delegateEvents()
 
       event = $.Event('keyup')
       event.which = 32 # spacebar
@@ -54,6 +58,8 @@ describe 'QuizView', ->
     it 'calls click on Again when 1 is pressed', ->
       sinon.spy(@view, 'clickAnswer')
       @view.startQuiz()
+      @view.clickShow()
+      @view.delegateEvents()
 
       event = $.Event('keyup')
       event.which = 49 # 1
@@ -64,6 +70,8 @@ describe 'QuizView', ->
     it 'calls click on Hard when 2 is pressed', ->
       sinon.spy(@view, 'clickAnswer')
       @view.startQuiz()
+      @view.clickShow()
+      @view.delegateEvents()
 
       event = $.Event('keyup')
       event.which = 50 # 2
@@ -74,6 +82,8 @@ describe 'QuizView', ->
     it 'calls click on Normal when 3 is pressed', ->
       sinon.spy(@view, 'clickAnswer')
       @view.startQuiz()
+      @view.clickShow()
+      @view.delegateEvents()
 
       event = $.Event('keyup')
       event.which = 51 # 3
@@ -84,6 +94,8 @@ describe 'QuizView', ->
     it 'calls click on Easy when 4 is pressed', ->
       sinon.spy(@view, 'clickAnswer')
       @view.startQuiz()
+      @view.clickShow()
+      @view.delegateEvents()
 
       event = $.Event('keyup')
       event.which = 52 # 4
@@ -134,6 +146,9 @@ describe 'QuizView', ->
       # kinda gross, but this ensures that each answer is present
       @view.$('button.answer').each (_, elem) ->
         expect(['Again', 'Hard', 'Normal', 'Easy']).toContain($(elem).text())
+
+      #expect these arrays to be the same ~=
+      # expect(answers).toEqual($(elem).text())
 
 
   describe '.clickAnswer', ->
