@@ -9,8 +9,8 @@
     <time class='last_seen'>Never</time>
   <% end %>
   </dd>
-  <dd>Again:</dd><dt><%= @again_count %></dt>
-  <dd>Hard:</dd><dt><%= @hard_count %></dt>
-  <dd>Normal:</dd><dt><%= @normal_count %></dt>
-  <dd>Easy:</dd><dt><%= @easy_count %></dt>
+  <dt>Again:</dt><dd><%= @again_count %></dd>
+  <dt>Hard:</dt><dd><%= @hard_count %></dd>
+  <dt>Normal:</dt><dd><%= @normal_count %></dd>
+  <dt>Easy:</dt><dd><%= @easy_count %></dd>
 </dl>
