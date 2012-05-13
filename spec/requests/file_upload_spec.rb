@@ -2,7 +2,10 @@
 
 require 'spec_helper'
 require 'aws-sdk'
+require Rails.root.join('lib', 's3_bucket_url')
+
 include Warden::Test::Helpers
+include S3
 
 describe 'Avatar upload' do
   before(:all) do
@@ -23,8 +26,9 @@ describe 'Avatar upload' do
 
     # test that the file is actually on S3
     s3 = AWS::S3.new
-    uploaded_file = s3.buckets[ENV['AWS_S3_BUCKET']].objects['uploads/fat_cat.png']
-    wait_until { uploaded_file.exists? }
+    bucket = s3.buckets[ENV['AWS_S3_BUCKET']]
+    uploaded_file = bucket.objects[s3_key_base + '/fat_cat.png']
+    wait_until(10) { uploaded_file.exists? }
 
     uploaded_file.should exist
 

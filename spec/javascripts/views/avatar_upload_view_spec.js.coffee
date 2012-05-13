@@ -17,6 +17,21 @@ describe 'AvatarUploadView', ->
 
     #expect(setupStub).toHaveBeenCalled()
 
+  it 'calls suppressSubmit when the form is submitted', ->
+    sinon.spy(@view, 'suppressSubmit')
+    @view.delegateEvents()
+    @view.$('form').submit()
+
+    expect(@view.suppressSubmit).toHaveBeenCalled()
+
+  describe '.suppressSubmit', ->
+    it 'calls event.preventDefault', ->
+      eventStub = { preventDefault: -> }
+      sinon.spy(eventStub, 'preventDefault')
+      @view.suppressSubmit(eventStub)
+
+      expect(eventStub.preventDefault).toHaveBeenCalled()
+
   describe '.setupS3Form', ->
     it 'sets up the S3 upload form', ->
       fileuploadStub = sinon.spy(@view.$el, 'fileupload')
@@ -97,10 +112,9 @@ describe 'AvatarUploadView', ->
         url: '/fetch_avatar'
         type: 'POST'
         dataType: 'json'
-        data: { remote_url: 'AWS_UPLOAD_URL/uploads/remote_filename.png' }
+        data: { filename: 'remote_filename.png' }
 
       @view.submittedToS3(null, @data)
-
 
       expect($.ajax).toHaveBeenCalledWith(params)
       $.ajax.restore()

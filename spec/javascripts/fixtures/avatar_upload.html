@@ -1,10 +1,10 @@
 <img class="avatar profile" src="/avatar.png"></img>
 <img class="avatar thumb" src="/avatar.png"></img>
 <form id="avatar_upload" action="AWS_UPLOAD_URL" method="POST" enctype="multipart/form-data" data-bucket="AWS_TEST_BUCKET">
-  <span class="btn btn-success fileinput-button">
+  <button class="btn btn-success fileinput-button">
     <input type="file" name="file">
-    <span>Choose Avatar</span>
-  </span>
+    Choose Avatar
+  </button>
 
   <input type="hidden" name="AWSAccessKeyId" value="AWS_ACCESS_KEY">
   <input type="hidden" name="acl" value="public-read">

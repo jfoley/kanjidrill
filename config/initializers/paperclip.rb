@@ -7,7 +7,7 @@ Paperclip::Attachment.default_options.merge!(
     :bucket            => ENV['AWS_S3_BUCKET']
   },
 
-  :path => "/:attachment/:id/:style/:basename.:extension",
+  :path => "#{Rails.env}/:attachment/:id/:style/:basename.:extension",
   :default_url => "/:attachment/:style/missing.png",
 )
 

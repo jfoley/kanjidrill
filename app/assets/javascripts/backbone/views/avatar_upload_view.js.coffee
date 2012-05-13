@@ -1,6 +1,13 @@
 class KanjiDrill.Views.AvatarUploadView extends Backbone.View
+  events:
+    'submit': 'suppressSubmit'
+
   initialize: ->
     @setupS3Form()
+
+  suppressSubmit: (ev) ->
+    ev.preventDefault()
+    @$('input[type=file]').trigger('click')
 
   setupS3Form: ->
     @$el.fileupload(
@@ -37,16 +44,15 @@ class KanjiDrill.Views.AvatarUploadView extends Backbone.View
     @$('input[name=signature]').val(s3_credentials.signature)
 
   submittedToS3: (event, data) =>
-    ## since we cant just get this out of the response headers, we have to infer it ourselves :/
+    # since we cant just get this out of the response headers, we have to infer it ourselves :/
     filename = escape(data.files[0].name)
-    remote_url = "#{@$el.attr('action')}/uploads/#{filename}"
 
     # tell the server where to go get the new file
     $.ajax(
       url: '/fetch_avatar'
       type: 'POST'
       dataType: 'json'
-      data: { remote_url: remote_url }
+      data: { filename: filename }
     )
 
     # check back for the processed image
