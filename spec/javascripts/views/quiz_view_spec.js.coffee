@@ -192,6 +192,13 @@ describe 'QuizView', ->
 
       expect(@view.$('time')).toExist()
 
+    it 'renders "Never" if last_seen is null', ->
+      noTime = @response
+      noTime.last_seen = null
+
+      @view.showStats(null, noTime)
+      expect(@view.$('time').text()).toEqual('Never')
+
     it 'renders a <dl> element that contains all the stats', ->
       @view.showStats(null, @response)
 

@@ -11,7 +11,7 @@ class KanjiDrill.Views.AvatarUploadView extends Backbone.View
       done: @submittedToS3
 
       # TODO: figure out why this is failing (but not actually?)
-      #failed: @submittedToS3
+      failed: @submittedToS3
     )
 
   submitToS3: (event, data) =>

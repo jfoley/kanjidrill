@@ -12,7 +12,7 @@ describe Check do
   it { should validate_presence_of :kanji_id }
   it { should validate_presence_of :user_id }
 
-  [:no, :hard, :normal, :easy].each do |result|
+  [:again, :hard, :normal, :easy].each do |result|
     it { should allow_value(result).for(:result) }
   end
 end

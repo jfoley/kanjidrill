@@ -44,6 +44,13 @@ describe KanjiStats do
         generate_counts
       end
 
+      describe "stats[:again_count]" do
+        it "returns the number of times the user didnt remember the kanji" do
+          stats = KanjiStats.new(user, kanji)
+          stats.stats[:again_count].should == 2
+        end
+      end
+
       describe "stats[:hard_count]" do
         it "returns the number of times the user had a hard time remembering the kanji" do
           stats = KanjiStats.new(user, kanji)
@@ -69,6 +76,10 @@ describe KanjiStats do
 end
 
 def generate_counts
+  2.times do
+    Factory.create(:check, :user => user, :kanji => kanji, :result => :again)
+  end
+
   3.times do
     Factory.create(:check, :user => user, :kanji => kanji, :result => :hard)
   end
