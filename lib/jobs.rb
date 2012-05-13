@@ -15,7 +15,7 @@ module Jobs
 
     private
     def delete_s3_file(remote_url)
-      s3_key = remote_url[1..-1] # chop the leading /
+      s3_key = URI::parse(remote_url).path[1..-1] # chop the leading /
       s3 = AWS::S3.new
       bucket = s3.buckets[ENV['AWS_S3_BUCKET']]
       object = bucket.objects[s3_key]

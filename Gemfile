@@ -15,15 +15,19 @@ gem 'nokogiri'
 group :development, :test do
   gem 'debugger'
   gem 'sqlite3'
+  gem 'foreman'
 
   gem 'jasmine'
   gem 'jasminerice'
 end
 
 group :test do
+  gem 'capybara'
+  gem 'capybara-webkit'
   gem 'rspec-rails'
   gem 'shoulda'
   gem 'factory_girl_rails'
+  gem 'database_cleaner'
 end
 
 group :production do

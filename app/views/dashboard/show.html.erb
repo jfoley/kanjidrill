@@ -10,10 +10,10 @@
 <%= image_tag current_user.avatar.url(:profile), :alt => 'avatar', :class => 'avatar profile' %>
 
 <form id="avatar_upload" action="<%= s3_bucket_url %>" method="POST" enctype="multipart/form-data" data-bucket="<%= ENV['AWS_S3_BUCKET'] %>">
-  <span class="btn btn-success fileinput-button">
+  <button class="btn btn-success fileinput-button">
     <input type="file" name="file">
-    <span>Choose Avatar</span>
-  </span>
+    Choose Avatar
+  </button>
 
   <input type="hidden" name="AWSAccessKeyId" value="<%= ENV['AWS_ACCESS_KEY'] %>">
   <input type="hidden" name="acl" value="public-read">
@@ -24,5 +24,5 @@
 </form>
 
 <p>
-Its a little sparse in here at the moment, but expect some cool graphs to track your progress soon.
+  Its a little sparse in here at the moment, but expect some cool graphs to track your progress soon.
 </p>

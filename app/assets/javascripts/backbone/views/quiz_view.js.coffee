@@ -1,87 +1,63 @@
 class KanjiDrill.Views.QuizView extends Backbone.View
   events:
-    'click button.show': 'showMeaning'
-    'click button.no': 'clickNo'
-    'click button.maybe': 'clickMaybe'
-    'click button.yes': 'clickYes'
-    'click button.next': 'clickNext'
+    'click button.show':   'clickShow'
+    'click button.next':   'clickNext'
+    'click button.answer': 'clickAnswer'
 
-  btnGrp: $('.btn-grp')
+  statsTemplate: JST['backbone/templates/stats']
 
   initialize: ->
-    $(document).keyup(@keyup)
+    @btnGrp = $('.btn-grp')
+
     @checks = new KanjiDrill.Collections.ChecksCollection()
     @checks.on('sync', @showStats)
-    @showKanji()
 
-  showKanji: ->
+  startQuiz: ->
+    $('body').keyup(@keyup)
+    @showGlyph()
+
+  showGlyph: ->
     random_index = Math.floor(Math.random()*@collection.length)
     @kanji = @collection.at(random_index)
     glyph = @kanji.get('glyph')
+    @$('.glyph').text(glyph)
 
-    @$('.flashcard .glyph').text(glyph)
-    @renderShowButton()
+    @btnGrp.html($('<button class="btn show">Show</button>'))
 
-  createButton: (text) ->
-    className = text.toLowerCase()
-    $("<button class='btn #{className}'>#{text}</button>")
-
-  renderShowButton: ->
-    @btnGrp.html(@createButton('Show'))
-
-  renderAnswerButtons: ->
-    @btnGrp.html($('<p class="remember">Did you Remember?</p>'))
-    buttons = ['no', 'maybe', 'yes']
-    @btnGrp.append(@createButton(text)) for text in buttons
-
-  renderNextButton: ->
-    @btnGrp.html(@createButton('next'))
-
-  showMeaning: =>
-    @$('button.show').remove()
+  clickShow: ->
+    # show the meaning
     meaning = @kanji.get('meaning')
-    @$('.flashcard .meaning').text(meaning)
-    @renderAnswerButtons()
+    @$('.meaning').text(meaning)
 
-  showStats: (model, response) =>
-    time = "<time class='timeago' datetime='#{response.last_seen}'>#{response.last_seen}</time>"
-    last_seen = $("<dt>Last Seen</dt><dd>#{time}</dd>")
-    no_count = $("<dt>Hard</dt><dd>#{response.hard_count}</dd>")
-    maybe_count = $("<dt>Normal</dt><dd>#{response.normal_count}</dd>")
-    yes_count = $("<dt>Easy</dt><dd>#{response.easy_count}</dd>")
+    # ask the user how well they remembered (also, clear out .btn-grp)
+    @btnGrp.html($('<p class="remember">How well did you remember?</p>'))
 
-    def_list = $('<dl class="dl-horizontal"></dl>')
-    def_list.append(last_seen)
-      .append(no_count)
-      .append(maybe_count)
-      .append(yes_count)
+    # render answer buttons
+    for answer in ['Again', 'Hard', 'Normal', 'Easy']
+      answerClass = answer.toLowerCase()
+      @btnGrp.append($("<button class='btn answer #{answerClass}'>#{answer}</button>"))
 
-    @$('.stats').html(def_list)
-    @$('.timeago').timeago()
-    @btnGrp.empty()
-    @renderNextButton()
+  clickAnswer: (ev) =>
+    @checks.create(
+      result: $(ev.target).text().toLowerCase()
+      kanji_id: @kanji.get('id')
+    )
 
-  clickNo: ->
-    @createCheck('no')
+  showStats: (_, response) =>
+    @$('.stats').html(@statsTemplate(response))
+    @$('.stats .timeago').timeago()
 
-  clickMaybe: ->
-    @createCheck('maybe')
-
-  clickYes: ->
-    @createCheck('yes')
+    @btnGrp.html($('<button class="btn next">Next</button>'))
 
   clickNext: ->
-    @$('.stats').empty()
-    @$('.meaning').empty()
-    @$('.glyph').empty()
-    @showKanji()
+    $('.meaning, .stats').empty()
+    @showGlyph()
 
-  createCheck: (result) ->
-    @checks.create(result: result, kanji_id: @kanji.get('id'))
-
-  keyup: (e) ->
+  keyup: (e) =>
     switch e.which
       when 32 then $('button.show, button.next').click() # space
-      when 49 then $('button.no').click()                # 1
-      when 50 then $('button.maybe').click()             # 2
-      when 51 then $('button.yes').click()               # 3
+      when 49 then $('button.again').click()             # 1
+      when 50 then $('button.hard').click()              # 2
+      when 51 then $('button.normal').click()            # 3
+      when 52 then $('button.easy').click()              # 4
+

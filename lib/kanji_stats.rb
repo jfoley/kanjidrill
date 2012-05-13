@@ -7,6 +7,7 @@ class KanjiStats
   def stats
     {
       :last_seen    => last_check_at,
+      :again_count  => again_count,
       :hard_count   => hard_count,
       :normal_count => normal_count,
       :easy_count   => easy_count
@@ -24,6 +25,10 @@ class KanjiStats
     if checks.length > 1
       return checks.last.created_at
     end
+  end
+
+  def again_count
+    base_query.where(:result => :again).count
   end
 
   def hard_count
