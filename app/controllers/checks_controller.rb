@@ -1,7 +1,7 @@
 class ChecksController < ApplicationController
 
   def create
-    check = Check.create(params[:check].merge(:user_id => current_user.id))
+    check = current_user.checks.create(params[:check])
     stats = KanjiStats.new(current_user, check.kanji)
 
     render :json => stats
