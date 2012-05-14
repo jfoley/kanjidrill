@@ -9,4 +9,12 @@ class Check < ActiveRecord::Base
     :inclusion => { :in => [:again, :hard, :normal, :easy] }
   validates :kanji_id, :presence => true
   validates :user_id, :presence => true
+
+  def result=(obj)
+    if obj.class == String
+      result = obj.intern
+    end
+
+    super
+  end
 end
