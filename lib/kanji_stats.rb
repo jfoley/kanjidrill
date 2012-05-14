@@ -24,6 +24,8 @@ class KanjiStats
 
     if checks.length > 1
       return checks.last.created_at
+    else
+      return nil
     end
   end
 
